@@ -1,0 +1,15 @@
+{
+  "name": "@gasbuddy/upload-to-s3",
+  "bin": "./cli.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jean-Charles Sisk <jeancharles@gasbuddy.com>",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.212.1",
+    "commander": "^2.15.1",
+    "glob": "^7.1.2",
+    "npmlog": "^4.1.2",
+    "spacetime": "^4.0.1"
+  }
+}

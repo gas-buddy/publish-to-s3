@@ -1,0 +1,17 @@
+name: node-s3-deploy
+version: 1.0.0
+description: Uploads a directory to s3
+keywords:
+  - aws
+  - s3
+  - assets
+properties:
+  bucket:
+    type: string
+    required: true
+  role:
+    type: string
+    required: true
+  src:
+    type: string
+    required: false
