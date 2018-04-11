@@ -1,5 +1,5 @@
 name: publish-to-s3
-version: 1.0.1
+version: 1.0.2
 description: Uploads a directory to s3
 keywords:
   - aws

@@ -1,0 +1,10 @@
+box: gasbuddy/node-app:wercker-node8
+
+build:
+  steps:
+    - npm-install
+
+publish:
+  steps:
+    - internal/publish-step:
+      owner: gasbuddy

@@ -1,8 +1,7 @@
 #!/bin/sh
 
-BUCKET="${WERCKER_NODE_S3_DEPLOY_BUCKET}"
-SRC="${WERCKER_NODE_S3_DEPLOY_SRC}"
-ROLE="${WERCKER_NODE_S3_DEPLOY_ROLE}"
+BUCKET="${WERCKER_PUBLISH_TO_S3_BUCKET}"
+SRC="${WERCKER_PUBLISH_TO_S3_SRC}"
+ROLE="${WERCKER_PUBLISH_TO_S3_ROLE}"
 
-npm install --production
-node ./cli.js -b "${BUCKET}" -s "${SRC}" -r "${ROLE}"
+node "${WERCKER_STEP_ROOT}/cli.js" -b "${BUCKET}" -s "${SRC}" -r "${ROLE}"
