@@ -5,6 +5,4 @@ LOGLEVEL="${WERCKER_PUBLISH_TO_S3_LOGLEVEL:-"info"}"
 PATTERN="${WERCKER_PUBLISH_TO_S3_PATTERN}"
 
 echo "Publishing to bucket ${BUCKET} ..."
-set -o noglob
-node "${WERCKER_STEP_ROOT}/cli.js" -l "${LOGLEVEL}" -b "${BUCKET}" -s "${SRC}" -r "${ROLE}" ${PATTERN} || exit 1
-set +o noglob
+node "${WERCKER_STEP_ROOT}/cli.js" -l "${LOGLEVEL}" -b "${BUCKET}" -s "${SRC}" -r "${ROLE}" "${PATTERN}" || exit 1

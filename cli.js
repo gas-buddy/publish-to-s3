@@ -34,11 +34,12 @@ if (!program.bucket) {
   program.help();
 }
 
-if (!program.args.length) program.args = ['*'];
+let args = program.args.filter(arg => arg.trim() !== "");
+if (!args.length) args = ['*'];
 
-const pattern = program.args.length === 1
-  ? program.args[0]
-  : `{${program.args.join(',')}}`
+const pattern = args.length === 1
+  ? args[0]
+  : `{${args.join(',')}}`
 
 log.level = program.logLevel;
 
@@ -154,7 +155,7 @@ log.notice('main', 'starting');
   }
 })().then(() => {
   log.disableProgress();
-  log.notice('main', 'completed %s', spacetime.now().since(before).qualified);
+  log.notice('main', 'completed - started %s', spacetime.now().since(before).qualified);
 }).catch(err => {
   log.disableProgress();
   log.error('main', 'failed %s', before.since(spacetime.now()).qualified);
