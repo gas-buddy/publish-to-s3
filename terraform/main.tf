@@ -27,7 +27,6 @@ resource "aws_s3_bucket_policy" "assets" {
   policy = "${data.aws_iam_policy_document.assets_bucket_policy.json}"
 }
 
-/*
 resource "aws_iam_user" "wercker" {
   name = "wercker-deploy"
   lifecycle {
@@ -39,7 +38,6 @@ resource "aws_iam_user_policy" "wercker" {
   policy = "${data.aws_iam_policy_document.assume_role.json}"
   user = "${aws_iam_user.wercker.name}"
 } 
-*/
 
 resource "aws_iam_role" "wercker" {
   name_prefix = "${local.role_prefix}"
@@ -68,10 +66,7 @@ data "aws_iam_policy_document" "root_trust" {
     actions = ["sts:AssumeRole"]
     principals {
       type = "AWS"
-      identifiers = [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
-        "arn:aws:iam::896521799855:root"
-      ]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
   }
 }
