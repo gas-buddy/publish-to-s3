@@ -95,7 +95,7 @@ log.notice('main', 'starting');
 // async party!!!
 (async () => {
   const prefix = dirnameWithSlash();
-  const options = { Bucket: program.bucket };
+  const defaults = { Bucket: program.bucket };
   let listBucketPermission = true;
 
   log.enableProgress();
@@ -106,7 +106,7 @@ log.notice('main', 'starting');
     return;
   }
 
-  await s3.headBucket(options).promise().catch(e => {
+  await s3.headBucket(defaults).promise().catch(e => {
     if (e.code === 'Forbidden') {
       listBucketPermission = false;
       return log.notice('prerequisite', 'no permissions to listBucket - skipping');
@@ -115,6 +115,7 @@ log.notice('main', 'starting');
   });
 
   for (const match of matches) {
+    const options = Object.assign({}, defaults);
     if (!match.startsWith(prefix)) {
       log.error('upload-to-s3', 'invalid file - skipping %s', match);
       continue;
