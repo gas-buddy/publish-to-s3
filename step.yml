@@ -1,17 +1,17 @@
 name: publish-to-s3
 version: 1.0.2
-description: Uploads a directory to s3
+summary: Uploads a directory to s3
 keywords:
   - aws
   - s3
   - assets
 properties:
-  bucket:
+  - name: bucket
     type: string
     required: true
-  role:
+  - name: role
     type: string
     required: true
-  src:
+  - name: src
     type: string
     required: false
