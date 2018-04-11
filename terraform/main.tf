@@ -28,7 +28,7 @@ resource "aws_s3_bucket_policy" "assets" {
 }
 
 resource "aws_iam_user" "wercker" {
-  name = "wercker-deploy"
+  name = "${terraform.workspace == "staging" ? "wercker-publisher" : "wercker-deploy"}"
   lifecycle {
     prevent_destroy = true
   }
