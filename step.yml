@@ -1,5 +1,5 @@
 name: publish-to-s3
-version: 1.0.3
+version: 1.0.4
 summary: Uploads a directory to s3
 keywords:
   - aws
@@ -14,4 +14,8 @@ properties:
     required: true
   - name: src
     type: string
+    required: false
+  - name: loglevel
+    type: string
+    default: info
     required: false
