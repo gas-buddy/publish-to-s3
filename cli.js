@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 const { version } = require('./package.json');
+const { resolve, extname } = require('path');
 const { createReadStream } = require('fs');
 const spacetime = require('spacetime');
 const program = require('commander');
-const { resolve } = require('path');
+const mime = require('mime-types');
 const { sep } = require('path');
 const AWS = require('aws-sdk');
 const log = require('npmlog');
@@ -26,6 +27,7 @@ program
   .option('-R, --no-recurse', 'do not upload recursively') 
   .option('-l, --log-level <level>', 'set a log level', 'info')
   .option('-d, --dry-run', 'do a dry run')
+  .option('-T, --no-auto-content-type', 'do not set a content-type automatically')
   .option('-f, --force', 'overwrite existing or unknown files')
   .version(version, '-v, --version')
   .parse(process.argv);
@@ -138,6 +140,18 @@ log.notice('main', 'starting');
         }
       );
       options.Body = createReadStream(match);
+      if (program.autoContentType) {
+        const extension = extname(match);
+        if (!extension) {
+          log.notice('upload-to-s3', 'unable to infer content-type for %s', match);
+        } else {
+          const contentType = mime.contentType(extension);
+          log.info('upload-to-s3', 'setting content-type - %s', contentType);
+          options.ContentType = contentType;
+        }
+      } else {
+        log.info('upload-to-s3', 'skipping content-type lookup (-T)');
+      }
       log.info('upload-to-s3', 'uploading %s', match);
       await s3.upload(options).promise();
     } catch (e) {
