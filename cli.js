@@ -174,4 +174,5 @@ log.notice('main', 'starting');
   log.disableProgress();
   log.error('main', 'failed %s', before.since(spacetime.now()).qualified);
   log.error('main', err.stack);
+  process.exitCode = 1;
 });
