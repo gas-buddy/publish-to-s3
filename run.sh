@@ -3,6 +3,7 @@ SRC="${WERCKER_PUBLISH_TO_S3_SRC}"
 ROLE="${WERCKER_PUBLISH_TO_S3_ROLE}"
 LOGLEVEL="${WERCKER_PUBLISH_TO_S3_LOGLEVEL:-"info"}"
 PATTERN="${WERCKER_PUBLISH_TO_S3_PATTERN}"
+EXTRA_ARGS="${WERCKER_PUBLISH_TO_S3_EXTRA_ARGS}"
 
 echo "Publishing to bucket ${BUCKET} ..."
-node "${WERCKER_STEP_ROOT}/cli.js" -l "${LOGLEVEL}" -b "${BUCKET}" -s "${SRC}" -r "${ROLE}" "${PATTERN}" || exit 1
+node "${WERCKER_STEP_ROOT}/cli.js" -l "${LOGLEVEL}" -b "${BUCKET}" -s "${SRC}" -r "${ROLE}" "${EXTRA_ARGS}" "${PATTERN}" || exit 1
